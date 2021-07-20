@@ -68,14 +68,12 @@ class Game extends React.Component {
 
       let status;
       if (winner) {
-        if (winner[0] === 'draw') 
-            status = 'Match resulted in a draw';
-         else 
-            status = 'Winner: ' + winner.player + ' @ ' + winner.line;
-      } 
-      else {
+        status = 'Winner: ' + winner.player + ' @ ' + winner.line;
+      } else if (!current.squares.includes(null)) {
+          status = 'Match resulted in a draw';
+      } else {
         status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
-      } 
+      }
 
       return (
         <div className="game">
@@ -114,13 +112,8 @@ class Game extends React.Component {
             line: [a, b, c]
         };
       }
-      for (let i=0; i<9; i++) {
-          if (squares[i] === null) {
-              return null;
-          }
-      }
     }
-    return ['draw', null];
+    return null;
   }
 
   export default Game;
